@@ -1141,7 +1141,7 @@ plt.show()
 # - **§C.** The parametric rate. We sweep
 #   $n\in\{500,1000,2000,5000,10000\}$, set $\lambda_n = c/\sqrt n$, run CPGD to
 #   convergence, and plot the recovery error against $n$ on log-log axes
-#   (Corollary 9).
+#   (Corollary 18).
 # - **§D.** Takeaways.
 
 # %% [markdown]
@@ -1242,7 +1242,7 @@ plt.show()
 # Lambda is chosen as c/sqrt(n) with c=0.3 — small enough that BLASSO
 # amplitude shrinkage is mild (~20%) so cluster mass on Figure N' is
 # directly comparable to the truth amplitudes. The asymptotic rate of
-# Corollary 9 (coro:logistic_sinc4_recovery) only requires lambda_n ~ 1/sqrt(n) up to constants.
+# Corollary 18 (coro:logistic_sinc4_recovery) only requires lambda_n ~ 1/sqrt(n) up to constants.
 LOG_LAMBDA_C = 0.3
 LOG_LAMBDA_2k = LOG_LAMBDA_C / np.sqrt(2000)
 LOG_T = 10_000           # 10k iterations to let amplitudes converge
@@ -1384,7 +1384,7 @@ print_mirror_alignment(ma_log_2k, label="(logistic GBL, n=2000)")
 # %% [markdown]
 # ## §C — Recovery quality at large $n$
 #
-# **Theoretical claim (Corollary 9, `coro:logistic_sinc4_recovery`).** With the
+# **Theoretical claim (Corollary 18, `coro:logistic_sinc4_recovery`).** With the
 # optimal balancing $\lambda_n \asymp 1/\sqrt n$, the recovery error
 # $\sum_i |\hat a_i - a_i^\star| + \sum_i \|\hat x_i - x_i^\star\|$ is
 # $\mathcal{O}_\mathbb{P}(1/\sqrt n)$, i.e.\ matches the parametric
@@ -1579,12 +1579,12 @@ axR.set_title("Figure O' — Amplitude bias (right)")
 axR.grid(True, which="both", alpha=0.3); axR.legend(fontsize=9)
 
 fig.suptitle(rf"Parametric rate verification on the well-specified logistic GBL"
-             rf" — position slope = ${slope_pos:.2f}$, Corollary 9 predicts $-1/2$")
+             rf" — position slope = ${slope_pos:.2f}$, Corollary 18 predicts $-1/2$")
 fig.tight_layout()
 plt.show()
 
 print()
-print(f"Position-error empirical slope: {slope_pos:.3f}  (Corollary 9, coro:logistic_sinc4_recovery, predicts -0.500)")
+print(f"Position-error empirical slope: {slope_pos:.3f}  (Corollary 18, coro:logistic_sinc4_recovery, predicts -0.500)")
 
 # %% [markdown]
 # **Reading Figure O'.** *Position* recovery error follows the
