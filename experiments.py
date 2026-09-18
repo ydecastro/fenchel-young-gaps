@@ -20,9 +20,9 @@
 # and Yohann De Castro (2026)**:
 #
 # 1. **Paper I** — *Fenchel–Young Duality Gaps: Certified Early Stopping for
-#    Regularized Inverse Problems* (`main_FY_gap.tex`).
+#    Regularized Inverse Problems*.
 # 2. **Paper II** — *Localization and Exact Support Recovery for the
-#    Generalized Beurling–Lasso* (`main_GBL_NDSC.tex`).
+#    Generalized Beurling–Lasso*.
 #
 # The notebook reproduces **all four publication figures** of the two papers,
 # together with the short in-text verification checks quoted in their
@@ -30,10 +30,10 @@
 #
 # | Part | Paper | Figure | File | Where |
 # |---|---|---|---|---|
-# | I | Paper I | Fig 1 (`fig:lion_muon_delta`) | `fig_lion_muon_delta.pdf` | intro + §5.3 |
+# | I | Paper I | Fig 1 (`fig:lion_muon_delta`) | `fig_lion_muon_delta.pdf` | intro + §5.2 |
 # | I | Paper I | Fig 2 (`fig:certificate_evolution`) | `fig_certificate_evolution.pdf` | §5.1 |
-# | I | Paper I | Fig 3 (`fig:fy_decomposition_synthetic`) | `fig_fy_decomposition_synthetic.pdf` | §5.2 |
-# | II | Paper II | Fig 3 (`fig:logistic_well_spec`) | `fig_logistic_well_spec.pdf` | §5.1 |
+# | I | Paper I | Fig 3 (`fig:fy_decomposition_synthetic`) | `fig_fy_decomposition_synthetic.pdf` | §5.1 |
+# | II | Paper II | Fig 1 (`fig:logistic_well_spec`) | `fig_logistic_well_spec.pdf` | §4.2 |
 #
 # All shared utilities live in the `gbl/` package next to this notebook
 # (`particles.py`, `problems.py`, `optimizers.py`, `fy.py`, `utils.py`,
@@ -156,13 +156,13 @@ mpl.rcParams.update({
 # # Part I — Paper I experiments (*Fenchel–Young Duality Gaps*, §5)
 #
 # Three experiments: (§5.1) dual-certificate evolution along CPGD on a
-# synthetic 1D Gaussian super-resolution BLASSO; (§5.2) the Fenchel–Young
+# synthetic 1D Gaussian super-resolution BLASSO; (§5.1) the Fenchel–Young
 # duality-gap decomposition $\Delta_k=L_F+\lambda L_R$ as a computable
-# early-stopping certificate; (§5.3) certifiability of the deep-learning
+# early-stopping certificate; (§5.2) certifiability of the deep-learning
 # optimizers Lion-K and Muon on the same $F+\lambda R$ program.
 
 # %% [markdown]
-# # Synthetic 1D Gaussian super-resolution (basis of §5.1–§5.2)
+# # Synthetic 1D Gaussian super-resolution (basis of §5.1)
 #
 # **Setup (§5.1, `subsec:exp_certificate`).** $\mathcal{X}=[0,1]$, $k=4$
 # ground-truth spikes: positions $(0.15,0.31,0.50,0.83)$, signed amplitudes
@@ -428,7 +428,7 @@ print(f"  spurious   = {err_syn['spurious_mass']:.4f}")
 
 # %% [markdown]
 # ---
-# # Algorithmic interpretation: Lion-K and Muon (§5.3)
+# # Algorithmic interpretation: Lion-K and Muon (§5.2)
 #
 # Two non-convex optimisers widely used in deep learning — **Lion-K**
 # [Chen et al. 2023] and **Muon** [Jordan et al. 2024] — are built on the same
@@ -452,7 +452,7 @@ print(f"  spurious   = {err_syn['spurious_mass']:.4f}")
 # In this proximal form **all four optimisers solve exactly the same $F+\lambda R$
 # program**, and the oracle-free Fenchel–Young gap $\Delta_t=L_F+\lambda L_R$
 # (**Theorem 1**, `thm:dual_gap`) **certifies every one of them** — $\Delta_t\to0$
-# — exactly as it certifies CPGD in §5.1–§5.2. The paper's Figure 1 (regenerated below) shows this.
+# — exactly as it certifies CPGD in §5.1. The paper's Figure 1 (regenerated below) shows this.
 #
 # Both demos are short, finite-dimensional, and use only `numpy`+`torch.linalg`.
 
@@ -837,13 +837,13 @@ print(f"  || cert.matsign|_top-r  -  U_x V_x^T ||_F = "
 # identify this *common* principle, quantify it via the Fenchel–Young error bounds of
 # §2 (**Theorems 2–3**), and turn it into an exact-recovery + early-stopping
 # certificate via the Brøndsted–Rockafellar theorem of §3 (**Theorem 4**,
-# `thm:algorithmic_stability`). §5.3 shows the same Mirror-Alignment logic
+# `thm:algorithmic_stability`). §5.2 shows the same Mirror-Alignment logic
 # underlies two state-of-the-art deep-learning optimisers — and that the duality
 # gap certifies them on the common $F+\lambda R$ program.
 
 # %% [markdown]
 # ---
-# # Paper I figures (Figures 1–3 of `main_FY_gap.tex`)
+# # Paper I figures (Figures 1–3 of Paper I)
 #
 # The three publication figures, saved into `FIGS_DIR` where the LaTeX source
 # references them as `\includegraphics{figs/<name>}`.
@@ -934,7 +934,7 @@ print(f"Saved {FIGS_DIR / 'fig_certificate_evolution.pdf'}")
 plt.show()
 
 # %% [markdown]
-# ## Paper I, Figure 3 — Fenchel–Young decomposition (`fig:fy_decomposition_synthetic`, §5.2)
+# ## Paper I, Figure 3 — Fenchel–Young decomposition (`fig:fy_decomposition_synthetic`, §5.1)
 #
 # Single panel of the FY-tracker quantities along the synthetic-1D CPGD
 # trajectory. The certifiable signal $\lambda L_R$ decays at the Frank–Wolfe
@@ -960,7 +960,7 @@ print(f"Saved {FIGS_DIR / 'fig_fy_decomposition_synthetic.pdf'}")
 plt.show()
 
 # %% [markdown]
-# ## Paper I, Figure 1 — Certifiability of Lion-K and Muon (`fig:lion_muon_delta`, §5.3)
+# ## Paper I, Figure 1 — Certifiability of Lion-K and Muon (`fig:lion_muon_delta`, §5.2)
 #
 # **All optimisers solve the *same* $F+\lambda R$ program.**
 # Lion-K's $\mathrm{sign}$ step and Muon's matrix-sign step are subgradients of
@@ -1084,7 +1084,7 @@ ax3a.set_title(rf"(a) $\ell_1$ compressed sensing (coherent design), $\lambda={L
 _plot_fy_gap(ax3b, d_nuc, orac_nuc, "Muon/SVT")
 ax3b.set_title(rf"(b) nuclear matrix sensing, $\lambda={LAM_MAT:.2g}$ (Muon/SVT)")
 
-# (no suptitle: the LaTeX caption in main_FY_gap.tex describes the figure)
+# (no suptitle: the LaTeX caption in Paper I describes the figure)
 fig3.tight_layout()
 fig3.savefig(FIGS_DIR / "fig_lion_muon_delta.pdf")
 print(f"Saved {FIGS_DIR / 'fig_lion_muon_delta.pdf'}")
@@ -1096,21 +1096,22 @@ plt.show()
 
 # %% [markdown]
 # ---
-# # Part II — Paper II experiment (*Localization and Exact Support Recovery for the GBL*, §5.1)
+# # Part II — Paper II experiment (*Localization and Exact Support Recovery for the GBL*, §4.2)
 #
 # The worked example of Paper II: the **well-specified logistic GBL** with a
 # Gaussian carrier, solved by CPGD, illustrating the parametric statistical
-# rate of **Corollary 18** (`coro:logistic_sinc4_recovery`): at the optimal
-# balance $\lambda_n\asymp1/\sqrt n$ the recovery error reaches
-# $\mathcal{O}_{\mathbb P}(1/\sqrt n)$. The abstract recovery guarantee is
-# **Theorem 5** (`thm:support_stability`) under the non-degenerate source
-# condition **Definition 13** (`def:NDSC`), verified for the logistic $\Phi$
-# through the sinc-4 pivot via the Kernel Switch (**Propositions 14, 16, 17**).
+# rate of **Corollary 11** (`coro:logistic_sinc4_recovery`): at the balance
+# $\lambda_n\asymp\sqrt{\log n/n}$ the recovery error reaches
+# $\mathcal{O}_{\mathbb P}(\sqrt{\log n/n})$, the parametric rate up to a
+# logarithmic factor. The abstract recovery guarantee is
+# **Theorem 2** (`thm:support_stability`) under the non-degenerate source
+# condition **Definition 8** (`def:NDSC`), verified for the logistic $\Phi$
+# through the sinc-4 pivot via the Kernel Switch (**Propositions 9 and 10**).
 
 # %% [markdown]
 # # Worked example: the well-specified logistic GBL
 #
-# **The setup (analysed in Paper II §5, `sec:logistic_sinc4`).** A binary-classification ground truth on
+# **The setup (analysed in Paper II §4.1, `sec:logistic_sinc4`).** A binary-classification ground truth on
 # $\mathcal{X} = [0,1]$: $k$ spikes at known positions $x_j^\star$ with
 # amplitudes $(a_j^\star)$ and signs $(s_j^\star)$. The noiseless logit is
 # $g^\star = \Phi\mu^\star$ with $(\Phi\mu)(s) = \int \varphi(s-x)\,d\mu(x)$
@@ -1121,15 +1122,15 @@ plt.show()
 # $$
 # \min_\mu \;\frac{1}{n}\sum_i\log(1 + e^{-y_i (\Phi\mu)(\mathsf{s}_i)}) + \lambda\|\mu\|_{\mathrm{TV}}.
 # $$
-# **The claim (Corollary 18, `coro:logistic_sinc4_recovery`).** Combining the
-# abstract **Theorem 5** (`thm:support_stability`) with the sinc-4 Kernel-Switch
-# verification (**Proposition 17**, `prop:logistic_kernel_switch`) and the
-# functional-noise control of **Proposition 16** (`prop:logistic_noise_input`), the
+# **The claim (Corollary 11, `coro:logistic_sinc4_recovery`).** Combining the
+# abstract **Theorem 2** (`thm:support_stability`) with the sinc-4 Kernel-Switch
+# verification (**Proposition 9**, `prop:logistic_kernel_switch`) and the
+# functional-noise control of **Proposition 10** (`prop:logistic_noise_input`), the
 # recovery error
 # $\sum_i |\hat a_i - a_i^\star| + \sum_i \|\hat x_i - x_i^\star\|$
-# is $\mathcal{O}_{\mathbb{P}}(\lambda + 1/\sqrt n)$, with the optimal balancing
-# $\lambda \asymp 1/\sqrt n$ yielding the *parametric* statistical rate
-# $\mathcal{O}_{\mathbb{P}}(1/\sqrt n)$.
+# is $\mathcal{O}_{\mathbb{P}}(\lambda + C_\varphi/\sqrt n)$ (eq. `logistic_pop_rate`), with the
+# balancing $\lambda_n \asymp \sqrt{\log n/n}$ yielding the *parametric* rate
+# $\mathcal{O}_{\mathbb{P}}(\sqrt{\log n/n})$, up to a logarithmic factor.
 #
 # **What this section illustrates.**
 # - **§A.** Synthesis of a well-specified ground truth and a confirmation that
@@ -1141,7 +1142,7 @@ plt.show()
 # - **§C.** The parametric rate. We sweep
 #   $n\in\{500,1000,2000,5000,10000\}$, set $\lambda_n = c/\sqrt n$, run CPGD to
 #   convergence, and plot the recovery error against $n$ on log-log axes
-#   (Corollary 18).
+#   (Corollary 11).
 # - **§D.** Takeaways.
 
 # %% [markdown]
@@ -1231,18 +1232,18 @@ plt.show()
 # $\lambda_n = 0.3/\sqrt n \approx 0.0067$ and $T = 10\,000$ outer iterations
 # (the constant $0.3$ is chosen so that the cluster mass on Figure N' is
 # directly comparable to the truth amplitudes — a larger $\lambda$ such as
-# $1/\sqrt n$ still satisfies the Corollary-9 rate but produces a $\sim\!3\times$
+# $1/\sqrt n$ still satisfies the Corollary 11 rate but produces a $\sim\!3\times$
 # amplitude shrinkage that obscures the overlay; we use $0.7/\sqrt n$ in §C
 # below for the parametric-rate sweep). The `LogisticGaussianBlasso` problem
 # class handles the logistic loss + its gradient + the Fréchet derivative
 # `Jp`; the gap is read off by the same `FYTracker` recap'd in the Methods
-# cell above (the duality-gap decomposition of **Theorem 1**, §3).
+# cell above (the duality-gap decomposition of **Theorem 1** of the companion paper).
 
 # %%
 # Lambda is chosen as c/sqrt(n) with c=0.3 — small enough that BLASSO
 # amplitude shrinkage is mild (~20%) so cluster mass on Figure N' is
 # directly comparable to the truth amplitudes. The asymptotic rate of
-# Corollary 18 (coro:logistic_sinc4_recovery) only requires lambda_n ~ 1/sqrt(n) up to constants.
+# Corollary 11 (coro:logistic_sinc4_recovery) requires lambda_n ~ sqrt(log n / n) up to constants.
 LOG_LAMBDA_C = 0.3
 LOG_LAMBDA_2k = LOG_LAMBDA_C / np.sqrt(2000)
 LOG_T = 10_000           # 10k iterations to let amplitudes converge
@@ -1357,13 +1358,13 @@ plt.show()
 # $|a^\star_j|\in\{1.0,1.5\}$ to within a $\sim 20\%$ BLASSO shrinkage —
 # the expected $O(\lambda)$ bias of the regulariser. §C below uses
 # $\lambda_n = 0.7/\sqrt n$ for the recovery-vs-$n$ sweep, which still
-# matches the Corollary-9 rate but with less shrinkage at the moderate
+# matches the Corollary 11 rate but with less shrinkage at the moderate
 # sample sizes shown.
 
 # %% [markdown]
 # ### Mirror Alignment check at convergence (logistic GBL, $n=2000$)
 #
-# The KKT diagnostic of **§2.2 / §3** (Mirror Alignment), driven by the
+# The KKT diagnostic (Mirror Alignment of the companion paper), driven by the
 # logistic Fenchel–Young rather than the least-squares one. We compute it on
 # the *empirical* certificate $\eta = -\Phi^\star \nabla F_n(\Phi\hat\mu)/\lambda$
 # at the CPGD output $\hat\mu_{\lambda,n}$. The saturation residual measures
@@ -1371,7 +1372,7 @@ plt.show()
 # violation is small because the logistic objective bends $\eta$ much less
 # aggressively than the least-squares one in the tails. Strict off-support
 # feasibility together with non-degenerate curvature at the spikes is exactly
-# the NDSC (**Def 8**, `def:NDSC`) that drives **Theorem 4**.
+# the NDSC (**Def 8**, `def:NDSC`) that drives **Theorem 2**.
 
 # %%
 ma_log_2k = mirror_alignment_check(
@@ -1384,11 +1385,12 @@ print_mirror_alignment(ma_log_2k, label="(logistic GBL, n=2000)")
 # %% [markdown]
 # ## §C — Recovery quality at large $n$
 #
-# **Theoretical claim (Corollary 18, `coro:logistic_sinc4_recovery`).** With the
-# optimal balancing $\lambda_n \asymp 1/\sqrt n$, the recovery error
+# **Theoretical claim (Corollary 11, `coro:logistic_sinc4_recovery`).** With the
+# balancing $\lambda_n \asymp \sqrt{\log n/n}$, the recovery error
 # $\sum_i |\hat a_i - a_i^\star| + \sum_i \|\hat x_i - x_i^\star\|$ is
-# $\mathcal{O}_\mathbb{P}(1/\sqrt n)$, i.e.\ matches the parametric
-# statistical rate of the underlying GLM.
+# $\mathcal{O}_\mathbb{P}(\sqrt{\log n/n})$, i.e.\ the parametric statistical
+# rate of the underlying GLM up to a logarithmic factor (slope $-1/2$ on
+# log-log axes, the $\sqrt{\log n}$ factor being slowly varying).
 #
 # **What we illustrate here.** Running the full parametric-rate sweep
 # requires fine tuning of the CPGD hyperparameters (in particular, the
@@ -1487,18 +1489,19 @@ plt.show()
 #
 # The full sample-size sweep verifies the slope $-1/2$ on the position
 # component of the recovery error. This is the component that the support
-# stability of **Theorem 4** (`thm:support_stability`) localises through the
-# $\sqrt{\tau\,\lambda L_R}$-type error bound of **§3**, fed by the
-# kernel-mean-embedding functional noise $w_n$ of **Prop 7**
+# stability of **Theorem 2** (`thm:support_stability`) localises through the
+# $\sqrt{\tau\,\lambda L_R}$-type error bound, fed by the
+# kernel-mean-embedding functional noise $w_n$ of **Proposition 10**
 # (`prop:logistic_noise_input`) at sub-Gaussian rate $C_\varphi/\sqrt n$; the
 # amplitude component is bias-dominated, with a separate $\lambda$ scaling. We
 # run $n\in\{500, 1000, 2000, 5000, 10000\}$ with $\lambda_n=0.7/\sqrt n$
-# and 3 random repetitions per $n$.
+# and 12 random repetitions per $n$, shown as a mean curve with a shaded
+# 95% confidence interval on the mean.
 
 # %%
 LOG_N_GRID = [500, 1000, 2000, 5000, 10000]
 LOG_LAM_C = 0.7
-N_REPETITIONS = 3
+N_REPETITIONS = 12    # multiple random draws -> confidence interval on the mean
 LOG_T_SWEEP = 3000
 
 pos_errs_by_n = {n: [] for n in LOG_N_GRID}
@@ -1541,18 +1544,24 @@ for n in LOG_N_GRID:
 # %%
 ns = np.array(LOG_N_GRID, dtype=float)
 pos_mean = np.array([np.mean(pos_errs_by_n[n]) for n in LOG_N_GRID])
-pos_std = np.array([np.std(pos_errs_by_n[n]) for n in LOG_N_GRID])
+pos_std = np.array([np.std(pos_errs_by_n[n], ddof=1) for n in LOG_N_GRID])
 amp_mean = np.array([np.mean(amp_errs_by_n[n]) for n in LOG_N_GRID])
-amp_std = np.array([np.std(amp_errs_by_n[n]) for n in LOG_N_GRID])
+amp_std = np.array([np.std(amp_errs_by_n[n], ddof=1) for n in LOG_N_GRID])
+# 95%% confidence interval on the mean (normal approx, z = 1.96), over the
+# N_REPETITIONS independent random draws at each sample size n.
+_Z95 = 1.96
+pos_ci = _Z95 * pos_std / np.sqrt(N_REPETITIONS)
+amp_ci = _Z95 * amp_std / np.sqrt(N_REPETITIONS)
 
 # Fit slope on log-log for the position error
 slope_pos, intercept_pos = np.polyfit(np.log(ns), np.log(pos_mean), 1)
 
 fig, (axL, axR) = plt.subplots(1, 2, figsize=(14, 4.5))
 
-axL.errorbar(ns, pos_mean, yerr=pos_std, fmt="o-", color="C0",
-             linewidth=2, markersize=8, capsize=4,
-             label=fr"empirical $r_n^{{\rm pos}}$ (mean ± std, {N_REPETITIONS} reps)")
+axL.fill_between(ns, pos_mean - pos_ci, pos_mean + pos_ci, color="C0", alpha=0.20,
+                 label=fr"95% CI on the mean ({N_REPETITIONS} reps)")
+axL.plot(ns, pos_mean, "o-", color="C0", linewidth=2, markersize=8,
+         label=r"empirical $r_n^{\rm pos}$ (mean)")
 axL.plot(ns, np.exp(intercept_pos) * ns ** slope_pos,
          color="C0", linestyle="--", linewidth=1.5,
          label=fr"power-law fit: slope = {slope_pos:.2f}")
@@ -1565,9 +1574,10 @@ axL.set_ylabel(r"$\sum_j |\hat x_j - x_j^\star|$ (cluster-aggregated)")
 axL.set_title("Figure O' — Position-error rate (left)")
 axL.grid(True, which="both", alpha=0.3); axL.legend(fontsize=9)
 
-axR.errorbar(ns, amp_mean, yerr=amp_std, fmt="o-", color="C2",
-             linewidth=2, markersize=8, capsize=4,
-             label="empirical amplitude error")
+axR.fill_between(ns, amp_mean - amp_ci, amp_mean + amp_ci, color="C2", alpha=0.20,
+                 label=fr"95% CI on the mean ({N_REPETITIONS} reps)")
+axR.plot(ns, amp_mean, "o-", color="C2", linewidth=2, markersize=8,
+         label="empirical amplitude error (mean)")
 # Reference: amplitude bias scales like $\lambda_n = 0.7/\sqrt n$
 axR.plot(ns, LOG_LAM_C / np.sqrt(ns) * (amp_mean[-1] / (LOG_LAM_C / np.sqrt(ns[-1]))),
          color="C3", linestyle=":", linewidth=2,
@@ -1579,24 +1589,24 @@ axR.set_title("Figure O' — Amplitude bias (right)")
 axR.grid(True, which="both", alpha=0.3); axR.legend(fontsize=9)
 
 fig.suptitle(rf"Parametric rate verification on the well-specified logistic GBL"
-             rf" — position slope = ${slope_pos:.2f}$, Corollary 18 predicts $-1/2$")
+             rf" — position slope = ${slope_pos:.2f}$, Corollary 11 predicts $-1/2$")
 fig.tight_layout()
 plt.show()
 
 print()
-print(f"Position-error empirical slope: {slope_pos:.3f}  (Corollary 18, coro:logistic_sinc4_recovery, predicts -0.500)")
+print(f"Position-error empirical slope: {slope_pos:.3f}  (Corollary 11, coro:logistic_sinc4_recovery, predicts -0.500)")
 
 # %% [markdown]
 # **Reading Figure O'.** *Position* recovery error follows the
-# $\mathcal{O}(1/\sqrt n)$ slope predicted by Corollary 18
+# $\mathcal{O}(1/\sqrt n)$ slope predicted by Corollary 11
 # (`coro:logistic_sinc4_recovery`, left panel): the functional-noise /
 # kernel-mean-embedding bound on the dual proxy translates directly into a
 # position-localisation rate on the support. *Amplitude* error is
 # bias-dominated and scales as $\lambda_n = 0.7/\sqrt n$ (right panel) — also
 # $1/\sqrt n$ but driven by the lasso shrinkage of the regulariser, an
 # artefact of taking $\lambda \to 0$ at any finite rate. Together these are
-# the two components of Corollary 18's total bound
-# $\mathcal{O}_\mathbb{P}(\lambda + 1/\sqrt n)$, validated empirically at the
+# the two components of Corollary 11's total bound
+# $\mathcal{O}_\mathbb{P}(\lambda + C_\varphi/\sqrt n)$, validated empirically at the
 # cluster-aggregated level.
 
 # %% [markdown]
@@ -1605,29 +1615,29 @@ print(f"Position-error empirical slope: {slope_pos:.3f}  (Corollary 18, coro:log
 # | Claim | Evidence |
 # |---|---|
 # | Well-spec assumption is verifiable on the data via binned $\bar y$ vs $\sigma(g^\star)$. | Figure M' overlay. |
-# | The empirical-logistic GBL is solved by CPGD + the FY-tracker diagnostic of Theorem 1 (Paper II §2.3). | Figure N decomposition. |
+# | The empirical-logistic GBL is solved by CPGD + the FY-tracker diagnostic of Theorem 1 of the companion paper. | Figure N decomposition. |
 # | The recovered measure matches $\mu^\star$ at the spike level. | Figure N' overlay. |
-# | The recovery error scales as $\mathcal{O}_{\mathbb{P}}(1/\sqrt n)$ at $\lambda_n = c/\sqrt n$. | Figure O' slope $\approx -1/2$. |
+# | The recovery error scales as $\mathcal{O}_{\mathbb{P}}(\sqrt{\log n/n})$ at $\lambda_n \asymp \sqrt{\log n/n}$. | Figure O' slope $\approx -1/2$. |
 #
-# This is the operational form of **Corollary 18**
+# This is the operational form of **Corollary 11**
 # (`coro:logistic_sinc4_recovery`): the well-specified logistic GBL with the
-# sinc-4 pivot (verified via the Kernel Switch, **Proposition 17**) delivers the
+# sinc-4 pivot (verified via the Kernel Switch, **Proposition 9**) delivers the
 # parametric statistical rate *with no oracle dependence on $\mu^\star$*, the
 # Fenchel–Young tolerance of **Theorem 1** certifying support recovery.
 
 # %% [markdown]
-# # Paper II figure (Figure 3 of `main_GBL_NDSC.tex`)
+# # Paper II figure (Figure 1)
 #
-# We assemble the publication figure of Paper II §5.1 (`subsec:exp_logistic`)
-# and save it into `FIGS_DIR`, where `main_GBL_NDSC.tex` references it as
+# We assemble the publication figure of Paper II §4.2 (`sec:experiments`)
+# and save it into `FIGS_DIR`, where the Paper II source references it as
 # `\includegraphics{figs/fig_logistic_well_spec.pdf}`.
 
 # %% [markdown]
-# ## Paper II, Figure 3 — Worked example: logistic GBL, well-specified ($n=2000$)
+# ## Paper II, Figure 1 — Worked example: logistic GBL, well-specified ($n=2000$)
 #
-# The $2\times 2$ panel of Paper II §5.1 (`fig:logistic_well_spec`), illustrating
-# the worked example of Paper II §5 (`sec:logistic_sinc4`) and the parametric
-# rate of **Corollary 18** (`coro:logistic_sinc4_recovery`):
+# The $2\times 2$ panel of Paper II §4.2 (`fig:logistic_well_spec`), illustrating
+# the worked example of Paper II §4.1 (`sec:logistic_sinc4`) and the parametric
+# rate of **Corollary 11** (`coro:logistic_sinc4_recovery`):
 #  - **(a).** Noiseless logit $g^\star = \Phi\mu^\star$ and ground-truth spikes.
 #  - **(b).** Well-spec verification: binned empirical
 #    $\bar{\mathbf 1\{y=+1\}}$ vs $\sigma(g^\star)$.
@@ -1719,7 +1729,7 @@ mpl.rcParams.update(_prev_rc)
 #
 # Running all cells regenerates the four publication figures into `FIGS_DIR`:
 #
-# - `fig_lion_muon_delta.pdf` — Paper I, Figure 1 (§5.3);
+# - `fig_lion_muon_delta.pdf` — Paper I, Figure 1 (§5.2);
 # - `fig_certificate_evolution.pdf` — Paper I, Figure 2 (§5.1);
-# - `fig_fy_decomposition_synthetic.pdf` — Paper I, Figure 3 (§5.2);
-# - `fig_logistic_well_spec.pdf` — Paper II, Figure 3 (§5.1).
+# - `fig_fy_decomposition_synthetic.pdf` — Paper I, Figure 3 (§5.1);
+# - `fig_logistic_well_spec.pdf` — Paper II, Figure 1 (§4.2).

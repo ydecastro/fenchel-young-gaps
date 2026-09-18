@@ -17,10 +17,10 @@ papers' experiment sections.
 
 | Part | Paper | Figure | File |
 |---|---|---|---|
-| I | Paper I, Fig 1 (§5.3) | Certifiability of Lion-K and Muon | `fig_lion_muon_delta.pdf` |
+| I | Paper I, Fig 1 (§5.2) | Certifiability of Lion-K and Muon | `fig_lion_muon_delta.pdf` |
 | I | Paper I, Fig 2 (§5.1) | Dual certificate evolution along CPGD | `fig_certificate_evolution.pdf` |
-| I | Paper I, Fig 3 (§5.2) | Fenchel–Young duality-gap decomposition | `fig_fy_decomposition_synthetic.pdf` |
-| II | Paper II, Fig 3 (§5.1) | Well-specified logistic GBL, parametric rate | `fig_logistic_well_spec.pdf` |
+| I | Paper I, Fig 3 (§5.1) | Fenchel–Young duality-gap decomposition | `fig_fy_decomposition_synthetic.pdf` |
+| II | Paper II, Fig 1 (§4.2) | Well-specified logistic GBL, parametric rate | `fig_logistic_well_spec.pdf` |
 
 ## Structure
 
@@ -64,12 +64,14 @@ sweep runs five sample sizes up to n = 10 000).
 ## Citation
 
 ```bibtex
-@article{aubin2026fenchel,
-  author  = {Aubin-Frankowski, Pierre-Cyril and De Castro, Yohann},
-  title   = {Fenchel--Young Duality Gaps: Certified Early Stopping for Regularized Inverse Problems},
-  journal = {arXiv preprint},
-  year    = {2026},
-  note    = {arXiv identifier to appear}
+@misc{aubinfrankowski2026fenchelyoungdualitygapscertified,
+      title={Fenchel-Young Duality Gaps: Certified Early Stopping for Regularized Inverse Problems},
+      author={Pierre-Cyril Aubin-Frankowski and Yohann de Castro},
+      year={2026},
+      eprint={2609.17629},
+      archivePrefix={arXiv},
+      primaryClass={math.OC},
+      url={https://arxiv.org/abs/2609.17629},
 }
 
 @article{aubin2026localization,
@@ -80,6 +82,10 @@ sweep runs five sample sizes up to n = 10 000).
   note    = {arXiv identifier to appear}
 }
 ```
+
+## Disclosure of AI use
+
+In line with the Leiden Declaration on Artificial Intelligence and Mathematics, AI agents (Claude Code, Anthropic) were used in preparing this notebook and its documentation, to audit the code and cross-references and for editorial tasks. The authors produced and checked the experiments themselves and take sole responsibility for the code and its results.
 
 ## License
 
